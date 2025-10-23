@@ -1,4 +1,4 @@
-package level1.ex2.Model;
+package level1.ex2.model;
 
 public class WorkerOnline extends Worker {
     final int INTERNET_PRICE;

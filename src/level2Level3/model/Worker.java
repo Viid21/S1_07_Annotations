@@ -1,6 +1,9 @@
-package level1.ex2.Model;
+package level2Level3.model;
 
-public abstract class Worker {
+import level2Level3.annotations.SaveToJson;
+
+@SaveToJson(directory = "out/level2")
+public class Worker {
     String name;
     String surname;
     int priceHours;
@@ -10,7 +13,7 @@ public abstract class Worker {
         this.surname = surname;
         this.priceHours = priceHours;
     }
-
+    @Deprecated
     public int calculateSalary(int workedHours) {
         return workedHours * this.priceHours;
     }

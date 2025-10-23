@@ -1,4 +1,4 @@
-package level1.ex2.Model;
+package level1.ex2.model;
 
 public class WorkerInPerson extends Worker {
     private static int gas;

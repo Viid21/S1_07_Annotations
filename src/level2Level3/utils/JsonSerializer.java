@@ -1,6 +1,6 @@
-package level2.utils;
+package level2Level3.utils;
 
-import level2.annotations.SaveToJson;
+import level2Level3.annotations.SaveToJson;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -12,11 +12,10 @@ import java.util.Map;
 public final class JsonSerializer {
     public static void serialize(Object obj) throws IOException, IllegalAccessException {
         Class<?> clazz = obj.getClass();
-        SaveToJson saveToJson;
-        try{
-            saveToJson = clazz.getAnnotation(SaveToJson.class);
-        } catch (NullPointerException e) {
-            throw new NullPointerException("The class " + clazz.getName() + " does not contain the proper annotation.");
+
+        SaveToJson saveToJson = clazz.getAnnotation(SaveToJson.class);
+        if (saveToJson == null) {
+            throw new IllegalArgumentException("The class " + clazz.getName() + " does not contain the proper annotation.");
         }
 
         Map<String, Object> jsonMap = new LinkedHashMap<>();
