@@ -3,7 +3,6 @@ package level2.utils;
 import level2.annotations.SaveToJson;
 
 import java.io.IOException;
-import java.lang.annotation.AnnotationFormatError;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,18 +10,20 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class JsonSerializer {
-    public static void serialize(Object obj) throws IllegalAccessException, IOException {
+    public static void serialize(Object obj) throws IOException, IllegalAccessException {
         Class<?> clazz = obj.getClass();
-        SaveToJson saveToJson = clazz.getAnnotation(SaveToJson.class);
+        SaveToJson saveToJson;
+        try{
+            saveToJson = clazz.getAnnotation(SaveToJson.class);
+        } catch (NullPointerException e) {
+            throw new NullPointerException("The class " + clazz.getName() + " does not contain the proper annotation.");
+        }
+
         Map<String, Object> jsonMap = new LinkedHashMap<>();
         Path dir = Path.of(saveToJson.directory());
         Path file = dir.resolve(clazz.getSimpleName() + ".json");
 
         StringBuilder jsonContent = new StringBuilder();
-
-        if (saveToJson == null) {
-            throw new IllegalArgumentException("The class " + clazz.getName() + " does not contain the proper annotation.");
-        }
 
         for (Field field : clazz.getDeclaredFields()) {
             field.setAccessible(true);
