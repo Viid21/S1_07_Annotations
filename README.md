@@ -1,4 +1,4 @@
-# 🧑‍💻 Task S1.06. Java Annotations  
+# 🧑‍💻 Task S1.07. Java Annotations  
 **Author:** David Rey  
 **Corrected by:** Adolfo Caicaguare (adolcc)
 
